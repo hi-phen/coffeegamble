@@ -13,14 +13,12 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.18/paper-full.min.js"></script>
-<script src="/resources/js/batting.js"></script>
 
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="/resources/css/jumbotron-narrow.css">
 
-<title>COFFEE BATTING</title>
+<title>COFFEE GAMBLE</title>
 </head>
 <body>
 <div class="container">
@@ -30,7 +28,7 @@
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
         </ul>
-        <h3 class="text-muted">Coffee Batting</h3>
+        <h3 class="text-muted">Coffee Gamble</h3>
       </div>
 
       <div class="jumbotron">
@@ -39,17 +37,16 @@
         	<canvas id="bc" class="subcanvs"></canvas>
         	<canvas id="c" class="subcanvs" ></canvas>
         </p>
-        <p><a class="btn btn-lg btn-success" href="javascript:batting();" role="button">BATTING</a></p>
+        <p><a class="btn btn-lg btn-success" id="gamble" href="#" role="button">GAMBLE</a></p>
       </div>
 	  	
       <div class="row marketing">
-        <div class="col-lg-6">
+        <div class="col-lg-12" ng-controller="PhoneListCtrl">
           <h4>Subheading</h4>
           <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
+		</p>
           <h4>Subheading</h4>
           <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
           <h4>Subheading</h4>
           <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
         </div>
@@ -61,9 +58,7 @@
 
     </div> <!-- /container -->
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+	<script src="/resources/js/gamble.js"></script>
+	<script src="/resources/js/siteController.js"></script>
   </body>
 </html>
