@@ -23,7 +23,12 @@ public class GambleLoser {
 	}
 
 	public Entity toEntity(){
-		Entity entity = new Entity("gambleloser",gamblerId);
+		Entity entity;
+		if(loserId == null){
+			entity = new Entity("gambleloser",gamblerId);
+		}else{
+			entity = new Entity("gambleloser", loserId.getId(), gamblerId);
+		}
 		entity.setProperty("gamblerId", gamblerId);
 		entity.setProperty("loseDate", loseDate);
 		return entity;
