@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import coffee.gambler.dao.GamblerDAO;
 import coffee.gambler.domain.Gambler;
@@ -25,6 +26,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 * @Version : 
  */
 @Service
+@Transactional
 public class GamblerService {
 
 	@Autowired

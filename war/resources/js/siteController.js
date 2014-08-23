@@ -22,6 +22,11 @@
 							templateUrl : '/gambler'
 							,controller:'GamblerController'
 						})
+						.when('/loser',
+						{
+							templateUrl : '/gamble/loser'
+							,controller:'LoserController'
+						})
 						.otherwise({redirectTo : '/'});
 				});
 	gambleApp.controller('SiteController',function($scope,$route){

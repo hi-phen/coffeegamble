@@ -26,7 +26,7 @@
 			<ul class="nav nav-pills pull-right">
 				<li ng-class="{active:$route.current.templateUrl=='/gamble'}"><a href="#">Home</a></li>
 				<li ng-class="{active:$route.current.templateUrl=='/gambler'}"><a href="#gambler">Gambler</a></li>
-				<li><a href="#">Contact</a></li>
+				<li ng-class="{active:$route.current.templateUrl=='/gamble/loser'}"><a href="#loser">Loser</a></li>
 			</ul>
 			<h3 class="text-muted">Coffee Gamble</h3>
 		</div>
@@ -36,8 +36,10 @@
 			<p>&copy; Yobin</p>
 		</div> 
 	</div>
+	
 	<script src="/resources/js/siteController.js"></script>
 	<script src="/resources/js/gambleController.js"></script>
 	<script src="/resources/js/gamblerController.js"></script>
+	<script src="/resources/js/loserController.js"></script>
 </body>
 </html>

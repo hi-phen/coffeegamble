@@ -1,5 +1,6 @@
 (function(){
 	gambleApp.controller('GamblerController',function($scope, $http){
+		//fn init
 		$scope.addGambler = function(){
 			if($scope.newGamblerName){
 				$http.post('gambler/addGambler',$.param({'name':$scope.newGamblerName}))
@@ -7,6 +8,8 @@
 					$scope.gamblers = data;
 					$scope.newGamblerName = "";
 				});
+			}else{
+				$('#nameinput').popover('show');
 			}
 		};
 		
@@ -19,16 +22,18 @@
 		
 		$scope.activeGambler = function(key,active){
 			active = !active;
-			console.log(key,active);
 			$http.post('gambler/activeGambler',$.param({'key':key,'active':active}))
 			.success(function(data){
 				$scope.gamblers = data;
 			});
 		};
 		
-		
+		//data init
 		$http.get('gambler/getGamblerList').success(function(data) {
 			$scope.gamblers = data;
 		});
+		
+		$('#nameinput').popover({trigger: 'manual'})
+			.focus(function(){$('#nameinput').popover('hide');});
 	});
 })();

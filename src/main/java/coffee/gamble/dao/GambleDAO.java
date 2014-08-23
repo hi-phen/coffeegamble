@@ -43,4 +43,13 @@ public class GambleDAO {
 		return datastoreService.prepare(query).asIterable();
 	}
 
+	public Iterable<Entity> getLoser() {
+		Query query = new Query("gambleloser").addSort("loseDate",SortDirection.DESCENDING);
+		return datastoreService.prepare(query).asIterable();
+	}
+	
+	public void deleteLoser(Entity loser) {
+		datastoreService.delete(loser.getKey());
+	}
+
 }

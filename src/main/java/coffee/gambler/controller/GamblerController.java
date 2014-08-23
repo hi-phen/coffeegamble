@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import coffee.gambler.domain.Gambler;
 import coffee.gambler.service.GamblerService;
 
-import com.google.appengine.api.datastore.KeyFactory;
-
 @Controller
 @RequestMapping("gambler")
 public class GamblerController {
@@ -43,9 +41,8 @@ public class GamblerController {
 	}
 	
 	@RequestMapping("deleteGambler")
-	public @ResponseBody String deleteGambler(@RequestParam String key,Gambler gambler) throws JsonGenerationException, JsonMappingException, IOException{
-		gambler.setGamblerId(KeyFactory.createKey("gambler", Long.valueOf(key)));
-		gamblerService.deleteGambler(gambler);
+	public @ResponseBody String deleteGambler(@RequestParam long key) throws JsonGenerationException, JsonMappingException, IOException{
+		gamblerService.deleteGambler(new Gambler(key));
 		return om.writeValueAsString(gamblerService.getGamblerList());
 	}
 	

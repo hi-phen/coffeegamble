@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 
 public class Gambler{
 	private Key gamblerId; // 아이디
@@ -29,6 +30,11 @@ public class Gambler{
 		this.name = (String) entity.getProperty("name");
 		this.addDate = (Date) entity.getProperty("addDate");
 		this.active = (Boolean) entity.getProperty("active");
+	}
+	
+	public Gambler(long key){
+		super();
+		this.gamblerId = KeyFactory.createKey("gambler", key);
 	}
 	
 	public Entity toEntity(){

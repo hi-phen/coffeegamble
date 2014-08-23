@@ -1,6 +1,5 @@
 package coffee.gamble.service;
 
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -137,7 +136,7 @@ public class GambleService {
 	 * @return 
 	 */
 	public Key addLoser(Gambler gambler) {
-		return gambleDAO.addLoser(new GambleLoser(gambler.getGamblerId(),new Date()).toEntity());
+		return gambleDAO.addLoser(new GambleLoser(gambler.getGamblerId(),new Date(),gambler.getName()).toEntity());
 	}
 	
 	/**
@@ -148,7 +147,17 @@ public class GambleService {
 	 * @return
 	 */
 	public Key addLoser(Gambler gambler,Date date) {
-		return gambleDAO.addLoser(new GambleLoser(gambler.getGamblerId(),date).toEntity());
+		return gambleDAO.addLoser(new GambleLoser(gambler.getGamblerId(),date,gambler.getName()).toEntity());
+	}
+	
+	/**
+	 * Desc : 당첨자 삭제 
+	 * @Method Name : deleteLoser
+	 * @param loser
+	 * @return
+	 */
+	public void deleteLoser(GambleLoser loser){
+		gambleDAO.deleteLoser(loser.toEntity());
 	}
 
 	/**
@@ -175,6 +184,20 @@ public class GambleService {
 	 */
 	public List<GambleLoser> getLoser(Date start, Date end){
 		Iterable<Entity> losers = gambleDAO.getLoser(start,end);
+		ArrayList<GambleLoser> loserArray = new ArrayList<GambleLoser>();
+		for(Entity loser : losers){
+			loserArray.add(new GambleLoser(loser));
+		}
+		return loserArray;
+	}
+	
+	/**
+	 * Desc : 당첨자 명단을 받아옴 (전체) 
+	 * @Method Name : getLoser
+	 * @return
+	 */
+	public List<GambleLoser> getLoser(){
+		Iterable<Entity> losers = gambleDAO.getLoser();
 		ArrayList<GambleLoser> loserArray = new ArrayList<GambleLoser>();
 		for(Entity loser : losers){
 			loserArray.add(new GambleLoser(loser));
