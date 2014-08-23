@@ -49,10 +49,9 @@ public class GamblerController {
 		return om.writeValueAsString(gamblerService.getGamblerList());
 	}
 	
-	@RequestMapping("updateGambler")
-	public @ResponseBody String updateGambler(@RequestParam String key,Gambler gambler) throws JsonGenerationException, JsonMappingException, IOException{
-		gambler.setGamblerId(KeyFactory.createKey("gambler", Long.valueOf(key)));
-		gamblerService.updateGambler(gambler);
+	@RequestMapping("activeGambler")
+	public @ResponseBody String activeGambler(@RequestParam long key,@RequestParam boolean active) throws JsonGenerationException, JsonMappingException, IOException{
+		gamblerService.activeGambler(key,active);
 		return om.writeValueAsString(gamblerService.getGamblerList());
 	}
 	

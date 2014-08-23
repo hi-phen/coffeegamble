@@ -1,5 +1,6 @@
 package coffee.gamble.service;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -108,18 +109,18 @@ public class GambleService {
 				if(gambler == null) continue; // 당첨자가 현재 참가자에 없음
 				float chance = gambler.getChance(); //당첨자의 확률
 				gambler.setChance(0); //당첨자는 확률을 반납
-				gambler.getWeightLog().add(sdf.format(loser.getLoseDate())+"   당첨으로 인한 확률 반납 > "+String.valueOf(chance*-1)); //로그 기록
+				gambler.getWeightLog().add(sdf.format(loser.getLoseDate())+"   당첨 > "+String.valueOf(chance*-1)+"%("+gambler.getChance()+"%)"); //로그 기록
 				
 				if(activeGamblerList.size() == 1){ //혼자일경우는..
 					gambler.setChance(chance);
-					gambler.getWeightLog().add(sdf.format(loser.getLoseDate())+" 미당첨으로 인한 확률 추가 > "+ String.valueOf(chance)); //로그 기록
+					gambler.getWeightLog().add(sdf.format(loser.getLoseDate())+" 미당첨 > "+ String.valueOf(chance)+"%("+gambler.getChance()+"%)"); //로그 기록
 				}else{
 					//나머지 참가자들은 확률을 나눠 가진다
 					float divChance = ((int)(chance/(activeGamblerList.size()-1)*100f))/100f;
 					for(Gambler winner : activeGamblerList){
 						if(winner.getGamblerId().getId() != loserId){
-							winner.setChance(winner.getChance()+divChance);
-							winner.getWeightLog().add(sdf.format(loser.getLoseDate())+" 미당첨으로 인한 확률 추가 > "+String.valueOf(divChance)); //로그 기록		
+							winner.setChance(((int)((winner.getChance()+divChance)*100f))/100f);
+							winner.getWeightLog().add(sdf.format(loser.getLoseDate())+" 미당첨 > "+String.valueOf(divChance)+"%("+winner.getChance()+"%)"); //로그 기록		
 						}
 					}
 				}

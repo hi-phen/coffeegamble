@@ -1,7 +1,5 @@
 package coffee.gambler.dao;
 
-import java.util.Date;
-
 import org.springframework.stereotype.Repository;
 
 import com.google.appengine.api.datastore.DatastoreService;
@@ -30,7 +28,6 @@ public class GamblerDAO {
 	DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
 	
 	public Key addGambler(Entity gambler) {
-		gambler.setProperty("addDate", new Date());
 		return datastoreService.put(gambler);
 	}
 
@@ -39,8 +36,8 @@ public class GamblerDAO {
 	}
 	
 	public Iterable<Entity> getActiveGamblerlist(boolean isActive) {
-		FilterPredicate isActiveFilter = new Query.FilterPredicate("isActive", FilterOperator.EQUAL, isActive);
-		Query query = new Query("gambler").setFilter(isActiveFilter);
+		FilterPredicate isActiveFilter = new Query.FilterPredicate("active", FilterOperator.EQUAL, isActive);
+		Query query = new Query("gambler").setFilter(isActiveFilter).addSort("addDate",SortDirection.DESCENDING);
 		
 		return datastoreService.prepare(query).asIterable();
 	}

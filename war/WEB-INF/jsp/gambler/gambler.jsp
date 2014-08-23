@@ -1,6 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <div>
 	<div class="jumbotron">
-		<h1>ADD GAMBLER</h1>
+		<h1>GAMBLER</h1>
 		<p>
 			<input type="text" ng-model="newGamblerName" placeholder=" Please input name">
 		</p>
@@ -10,10 +11,10 @@
 	</div>
 	<div class="row marketing" >
 		<div class="col-xs-6" ng-repeat="gambler in gamblers">
-			<p><h4>{{gambler.name}}</h4></p>
-			<p>{{gambler.gamblerId.id}}</p>
+			<p><h4><strong>{{gambler.name}}</strong></h4></p>
+			<p>{{gambler.addDate | date : 'yyyy-MM-dd hh:mm:ss'}}</p>
 			<p>
-				<a class="btn btn-sm" ng-class="{'btn-info':gambler.active,'btn-success':!gambler.active}" ng-click="updateGambler(gambler.gamblerId.id,gambler.active,gambler.name)" role="button">
+				<a class="btn btn-sm" ng-class="{'btn-info':gambler.active,'btn-success':!gambler.active}" ng-click="activeGambler(gambler.gamblerId.id,gambler.active)" role="button">
 					<span ng-if="gambler.active">
 					DEACTIVATE
 					</span>

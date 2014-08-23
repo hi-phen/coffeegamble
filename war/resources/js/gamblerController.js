@@ -5,6 +5,7 @@
 				$http.post('gambler/addGambler',$.param({'name':$scope.newGamblerName}))
 				.success(function(data){
 					$scope.gamblers = data;
+					$scope.newGamblerName = "";
 				});
 			}
 		};
@@ -16,10 +17,10 @@
 			});
 		};
 		
-		$scope.updateGambler = function(key,active,name){
+		$scope.activeGambler = function(key,active){
 			active = !active;
 			console.log(key,active);
-			$http.post('gambler/updateGambler',$.param({'key':key,'active':active,'name':name}))
+			$http.post('gambler/activeGambler',$.param({'key':key,'active':active}))
 			.success(function(data){
 				$scope.gamblers = data;
 			});

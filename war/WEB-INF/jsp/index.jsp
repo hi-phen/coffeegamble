@@ -16,6 +16,7 @@
 <link rel="stylesheet"	href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet"	href="/resources/css/bootstrap-theme.min.css">
 <link rel="stylesheet"  href="/resources/css/jumbotron-narrow.css">
+<link rel="stylesheet"  href="/resources/css/common.css">
 
 <title>COFFEE GAMBLE</title>
 </head>
@@ -36,7 +37,6 @@
 		</div> 
 	</div>
 	<script src="/resources/js/siteController.js"></script>
-	<script src="/resources/js/gamble.js"></script>
 	<script src="/resources/js/gambleController.js"></script>
 	<script src="/resources/js/gamblerController.js"></script>
 </body>

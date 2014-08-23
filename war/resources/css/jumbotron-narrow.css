@@ -77,6 +77,3 @@ body {
     border-bottom: 0;
   }
 }
-
-.canvas-cantainer{position:relative;height:200px;}
-.subcanvs{position:absolute;left:0;top:0}

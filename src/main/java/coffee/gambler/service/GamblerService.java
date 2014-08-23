@@ -12,6 +12,7 @@ import coffee.gambler.domain.Gambler;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 
 /**
 * <pre>
@@ -90,6 +91,13 @@ public class GamblerService {
 
 	public void deleteGambler(Gambler gambler) {
 		gamblerDAO.deleteGambler(gambler.toEntity());
+	}
+
+	public void activeGambler(long keyId,boolean active) {
+		Key key = KeyFactory.createKey("gambler", keyId);
+		Gambler gambler = getGambler(key);
+		gambler.setActive(active);
+		gamblerDAO.updateGambler(gambler.toEntity());
 	}
 
 }
