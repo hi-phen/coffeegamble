@@ -40,6 +40,11 @@ public class GambleController {
 		return "loser/loser";
 	}
 	
+	@RequestMapping("statics")
+	public String statics(){
+		return "statics/statics";
+	}
+	
 	@RequestMapping("getGambleEntry")
 	public @ResponseBody String getGambleEntry() throws JsonGenerationException, JsonMappingException, IOException{
 		return om.writeValueAsString(gambleService.getGambleEntry());

@@ -22,10 +22,15 @@
 							templateUrl : '/gambler'
 							,controller:'GamblerController'
 						})
-						.when('/loser',
+						.when('/history',
 						{
 							templateUrl : '/gamble/loser'
 							,controller:'LoserController'
+						})
+						.when('/statics',
+						{
+							templateUrl : '/gamble/statics'
+							,controller:'StaticsController'
 						})
 						.otherwise({redirectTo : '/'});
 				});
