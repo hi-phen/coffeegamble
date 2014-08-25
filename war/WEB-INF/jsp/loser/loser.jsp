@@ -11,13 +11,14 @@
 			<button class="btn btn-lg btn-success" ng-click="addLoser()" role="button" >ADD</button>
 		</p>
 	</div>
-	<div class="row marketing" >
-		<h2><strong>Games History List</strong></h2>
-		<div class="col-xs-6" ng-repeat="loser in gambleLoser">
+	<div class="row marketing" infinite-scroll='getLoser()' infinite-scroll-disabled='busy' infinite-scroll-distance='0'>
+		<h2><strong>Games History</strong> <button class="btn btn-md btn-danger" ng-click="deleteLoserAll()" role="button">DELETE ALL</button></h2>
+		<p></p>
+		<div class="col-xs-6" ng-repeat="loser in gambleLoser track by $index">
 			<p><h3><strong>{{loser.gamblerName}}</strong></h3></p>
-			<p>DATE : {{loser.loseDate | date : 'yyyy-MM-dd hh:mm:ss'}}</p>
+			<p>DATE : {{loser.loseDate | date : 'yyyy-MM-dd HH:mm:ss'}}</p>
 			<p>
-				<a class="btn btn-sm btn-danger" ng-click="deleteLoser(loser.loserId.id)" role="button">DELETE</a>
+				<a class="btn btn-sm btn-danger" ng-click="deleteLoser(loser,$index)" role="button">DELETE</a>
 			</p>
 		</div>
 	</div>

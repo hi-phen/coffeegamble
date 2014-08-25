@@ -73,7 +73,7 @@ public class GambleServiceTest {
 	
 	@Test
 	public void getGambleEntry() {
-		List<Gambler> gambleEntry = gambleService.getGambleEntry();
+		List<Gambler> gambleEntry = gambleService.getGambleEntry(1);
 		float chanceSum = 0;
 //		for(Gambler gambler : gambleEntry){
 //			logger.debug("****************************************");
@@ -108,7 +108,7 @@ public class GambleServiceTest {
 		for(int j=0;j<10;j++){
 			HashMap<String, Integer> bucket = new HashMap<String, Integer>();
 			for(int i=0;i<7;i++){
-				Gambler gambleResult = gambleService.getGambleResult(gambleService.getGambleEntry());
+				Gambler gambleResult = gambleService.getGambleResult(gambleService.getGambleEntry(1));
 				bucket.put(gambleResult.getName(), (bucket.get(gambleResult.getName())==null?0:bucket.get(gambleResult.getName()))+1);
 			}
 			logger.debug(bucket.toString());
@@ -119,9 +119,9 @@ public class GambleServiceTest {
 	public void deleteLoser() throws Exception{
 		Gambler gambler = gamblerService.getGambler(g1);
 		Key loserkey = gambleService.addLoser(gambler);
-		assertEquals(1, gambleService.getLoser().size());
+		assertEquals(1, gambleService.getLoser(1).size());
 		gambleService.deleteLoser(new GambleLoser(loserkey.getId()));
-		assertEquals(0, gambleService.getLoser().size());
+		assertEquals(0, gambleService.getLoser(1).size());
 	}
 	
 	

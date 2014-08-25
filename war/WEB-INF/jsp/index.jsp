@@ -12,6 +12,7 @@
 <script	src="/resources/js/common/bootstrap.min.js"></script>
 <script	src="/resources/js/common/angular.min.js"></script>
 <script	src="/resources/js/common/angular-route.min.js"></script>
+<script	src="/resources/js/common/ng-infinite-scroll.min.js"></script>
 
 <link rel="stylesheet"	href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet"	href="/resources/css/bootstrap-theme.min.css">

@@ -79,11 +79,12 @@ public class GambleService {
 	}
 	
 	/**
-	 * Desc : 당첨 확률이 계산된 실제 게임 참가자를 조회 
-	 * @return 
-	 * @Method Name : getGambleEntry
+	 * Desc : 당첨 확률이 계산된 실제 참가자를 조회 
+	 * @Method Name : getGambleEntry 
+	 * @param chanceMultipleValue 당첨자의 반납 확률 배수 ( ex : 1>전체반납 0.5>절반 반납 )
+	 * @return
 	 */
-	public List<Gambler> getGambleEntry() {
+	public List<Gambler> getGambleEntry(float chanceMultipleValue) {
 		List<Gambler> activeGamblerList = gamblerService.getActiveGamblerList(true);
 		List<GambleLoser> loserOnThisWeek = getLoserOnThisWeek();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -94,7 +95,7 @@ public class GambleService {
 			}
 			
 			HashMap<Long, Gambler> gamblermap = new HashMap<Long, Gambler>(); //키로 참가자를 찾기 위한 맵
-			float baseChance = ((int)(100f/activeGamblerList.size()*100f))/100f; //소수점 두번째 자리 까지만
+			float baseChance = ((int)(100f/activeGamblerList.size()*100))/100f; //소수점 두번째 자리 까지만
 			for(Gambler gambler : activeGamblerList){
 				gambler.setChance(baseChance); //기본 확률 세팅
 				gamblermap.put(gambler.getGamblerId().getId(), gambler);
@@ -106,8 +107,8 @@ public class GambleService {
 				long loserId = loser.getGamblerId().getId();
 				Gambler gambler = gamblermap.get(loserId);
 				if(gambler == null) continue; // 당첨자가 현재 참가자에 없음
-				float chance = gambler.getChance(); //당첨자의 확률
-				gambler.setChance(0); //당첨자는 확률을 반납
+				float chance = ((int)(gambler.getChance()*chanceMultipleValue*100))/100f; //당첨자의 확률 반납
+				gambler.setChance(((int)((gambler.getChance()-chance)*100))/100f); //당첨자는 확률을 반납
 				gambler.getWeightLog().add(sdf.format(loser.getLoseDate())+"   당첨 > "+String.valueOf(chance*-1)+"%("+gambler.getChance()+"%)"); //로그 기록
 				
 				if(activeGamblerList.size() == 1){ //혼자일경우는..
@@ -115,10 +116,10 @@ public class GambleService {
 					gambler.getWeightLog().add(sdf.format(loser.getLoseDate())+" 미당첨 > "+ String.valueOf(chance)+"%("+gambler.getChance()+"%)"); //로그 기록
 				}else{
 					//나머지 참가자들은 확률을 나눠 가진다
-					float divChance = ((int)(chance/(activeGamblerList.size()-1)*100f))/100f;
+					float divChance = ((int)(chance/(activeGamblerList.size()-1)*100))/100f;
 					for(Gambler winner : activeGamblerList){
 						if(winner.getGamblerId().getId() != loserId){
-							winner.setChance(((int)((winner.getChance()+divChance)*100f))/100f);
+							winner.setChance(((int)((winner.getChance()+divChance)*100))/100f);
 							winner.getWeightLog().add(sdf.format(loser.getLoseDate())+" 미당첨 > "+String.valueOf(divChance)+"%("+winner.getChance()+"%)"); //로그 기록		
 						}
 					}
@@ -196,13 +197,21 @@ public class GambleService {
 	 * @Method Name : getLoser
 	 * @return
 	 */
-	public List<GambleLoser> getLoser(){
-		Iterable<Entity> losers = gambleDAO.getLoser();
+	public List<GambleLoser> getLoser(int offset){
+		Iterable<Entity> losers = gambleDAO.getLoser(offset);
 		ArrayList<GambleLoser> loserArray = new ArrayList<GambleLoser>();
 		for(Entity loser : losers){
 			loserArray.add(new GambleLoser(loser));
 		}
 		return loserArray;
+	}
+
+	/**
+	 * Desc : 모든 당첨자 삭제
+	 * @Method Name : deleteLoserAll
+	 */
+	public void deleteLoserAll() {
+		gambleDAO.deleteLoserAll();
 	}
 	
 }

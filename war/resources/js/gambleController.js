@@ -1,23 +1,25 @@
 (function(){
 	gambleApp.controller('GambleController',['$scope','$http','drawLottery',function($scope, $http,drawLottery){
 		
-		function getGambleEntry(){
-			$http.get('gamble/getGambleEntry').success(function(data) {
+		$scope.getGambleEntry = function (){
+			console.log($scope.chanceMultipleValue);
+			$http.post('gamble/getGambleEntry',$.param({'chanceMultipleValue':$scope.chanceMultipleValue})).success(function(data) {
 				$scope.gamblers = data;
 			});	
-		}
+		};
 		
 		$scope.gamble = function(){
 			if($scope.gamblers.length > 0){
-				$http.post('gamble/getGambleResult')
+				$http.post('gamble/getGambleResult',$.param({'chanceMultipleValue':$scope.chanceMultipleValue}))
 				.success(function(data){
-					getGambleEntry();
+					$scope.getGambleEntry();
 					drawLottery(data.name);
 				});
 			}
-		}
+		};
 		
-		getGambleEntry();
+		$scope.chanceMultipleValue = 1;
+		$scope.getGambleEntry($scope.chanceMultipleValue);
 		
 	}]);
 	

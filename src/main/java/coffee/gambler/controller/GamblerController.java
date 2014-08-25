@@ -36,20 +36,25 @@ public class GamblerController {
 	
 	@RequestMapping("addGambler")
 	public @ResponseBody String addGambler(Gambler gambler) throws JsonGenerationException, JsonMappingException, IOException{
-		gamblerService.addGambler(gambler);
-		return om.writeValueAsString(gamblerService.getGamblerList());
+		return om.writeValueAsString(gamblerService.addGambler(gambler).getId());
 	}
 	
 	@RequestMapping("deleteGambler")
 	public @ResponseBody String deleteGambler(@RequestParam long key) throws JsonGenerationException, JsonMappingException, IOException{
 		gamblerService.deleteGambler(new Gambler(key));
-		return om.writeValueAsString(gamblerService.getGamblerList());
+		return om.writeValueAsString(Boolean.TRUE);
+	}
+	
+	@RequestMapping("deleteGamblerAll")
+	public @ResponseBody String deleteGambler() throws JsonGenerationException, JsonMappingException, IOException{
+		gamblerService.deleteGamblerAll();
+		return om.writeValueAsString(Boolean.TRUE);
 	}
 	
 	@RequestMapping("activeGambler")
 	public @ResponseBody String activeGambler(@RequestParam long key,@RequestParam boolean active) throws JsonGenerationException, JsonMappingException, IOException{
 		gamblerService.activeGambler(key,active);
-		return om.writeValueAsString(gamblerService.getGamblerList());
+		return om.writeValueAsString(Boolean.TRUE);
 	}
 	
 }

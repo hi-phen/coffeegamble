@@ -5,26 +5,49 @@
 			if($scope.newGamblerName){
 				$http.post('gambler/addGambler',$.param({'name':$scope.newGamblerName}))
 				.success(function(data){
-					$scope.gamblers = data;
-					$scope.newGamblerName = "";
+					if(data > 0){
+						$scope.gamblers.unshift(
+							{
+								"name" : $scope.newGamblerName
+								,"active" : true
+								,"gamblerId" : {id : data}
+							}
+						);
+						$scope.newGamblerName = "";
+					}
+					
+					
 				});
 			}else{
 				$('#nameinput').popover('show');
 			}
 		};
 		
-		$scope.deleteGambler = function(key){
-			$http.post('gambler/deleteGambler',$.param({'key':key}))
+		$scope.deleteGambler = function(obj,index){
+			$http.post('gambler/deleteGambler',$.param({'key':obj.gamblerId.id}))
 			.success(function(data){
-				$scope.gamblers = data;
+				if(data == 'true'){
+					$scope.gamblers.splice(index,1);
+				}
 			});
 		};
 		
-		$scope.activeGambler = function(key,active){
-			active = !active;
-			$http.post('gambler/activeGambler',$.param({'key':key,'active':active}))
+		$scope.deleteGamblerAll = function(){
+			$http.post('gambler/deleteGamblerAll')
 			.success(function(data){
-				$scope.gamblers = data;
+				if(data == 'true'){
+					$scope.gamblers = [];
+				}
+			});
+		}
+		
+		$scope.activeGambler = function(obj){
+			var active = !obj.active;
+			$http.post('gambler/activeGambler',$.param({'key':obj.gamblerId.id,'active':active}))
+			.success(function(data){
+				if(data == 'true'){
+					obj.active = active;
+				}
 			});
 		};
 		

@@ -25,6 +25,10 @@
 	
 	<beans:bean class="org.codehaus.jackson.map.ObjectMapper" id="om"></beans:bean>
 	
+	<beans:bean id="DataStoreService" class="com.google.appengine.api.datastore.DatastoreServiceFactory" 
+		factory-method="getDatastoreService">
+	</beans:bean>
+	
 	<context:component-scan base-package="coffee" />
 	
 </beans:beans>

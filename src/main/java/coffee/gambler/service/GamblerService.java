@@ -86,20 +86,45 @@ public class GamblerService {
 		}
 		return gamblerList;
 	}
-
+	
+	/**
+ 	 * Desc : 참가자 수정 
+	 * @Method Name : updateGambler
+	 * @param gambler
+	 * @return
+	 */
 	public Key updateGambler(Gambler gambler) {
 		return gamblerDAO.updateGambler(gambler.toEntity());
 	}
 
+	/**
+	 * Desc : 참가자 삭제
+	 * @Method Name : deleteGambler
+	 * @param gambler
+	 */
 	public void deleteGambler(Gambler gambler) {
 		gamblerDAO.deleteGambler(gambler.toEntity());
 	}
-
+	
+	/**
+	 * Desc : 참가자 활성화(비활성화)
+	 * @Method Name : activeGambler
+	 * @param keyId
+	 * @param active
+	 */
 	public void activeGambler(long keyId,boolean active) {
 		Key key = KeyFactory.createKey("gambler", keyId);
 		Gambler gambler = getGambler(key);
 		gambler.setActive(active);
 		gamblerDAO.updateGambler(gambler.toEntity());
+	}
+
+	/**
+	 * Desc : 참가자 삭제(전체) 
+	 * @Method Name : deleteGamblerAll
+	 */
+	public void deleteGamblerAll() {
+		gamblerDAO.deleteGamblerAll();
 	}
 
 }

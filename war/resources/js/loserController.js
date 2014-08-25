@@ -6,9 +6,21 @@
 				if(!(/\d{4}-\d{2}-\d{2}/g.test($scope.date))){ //날짜 형식 체크
 					$('#dateinput').popover('show');
 				}else{
-					$http.post('gamble/addLoser',$.param({'gamblerKey':$scope.loser.gamblerId.id,'gamblerName':$scope.loser.name,'dateStr':$scope.date}))
+					var date = $scope.date;
+					var now = new Date();
+					date += " "+(now.getHours()<10?"0"+now.getHours():now.getHours())+":"
+							+(now.getMinutes()<10?"0"+now.getMinutes():now.getMinutes())+":"
+							+(now.getSeconds()<10?"0"+now.getSeconds():now.getSeconds());
+					console.log(date);
+					$http.post('gamble/addLoser',$.param({'gamblerKey':$scope.loser.gamblerId.id,'gamblerName':$scope.loser.name,'dateStr':date}))
 					.success(function(data){
-						$scope.gambleLoser = data;
+						if(data > 0){
+							$scope.gambleLoser.unshift({
+								'gamblerName' : $scope.loser.name
+								,'loseDate' : date
+								,'loserId' : {id:data}
+							});	
+						}
 					})
 					.error(function(data){
 						$('#gamblerinput').popover('show');
@@ -17,24 +29,45 @@
 			}else{
 				$('#gamblerinput').popover('show');
 			}
-		}
+		};
 		
-		$scope.deleteLoser = function(key){
-			$http.post('gamble/deleteLoser',$.param({'loserKey':key}))
+		$scope.deleteLoser = function(obj,index){
+			$http.post('gamble/deleteLoser',$.param({'loserKey':obj.loserId.id}))
 			.success(function(data){
-				$scope.gambleLoser = data;
+				if(data == 'true'){
+					$scope.gambleLoser.splice(index,1);
+				}
 			});
-		}
+		};
+		
+		$scope.deleteLoserAll = function(){
+			$http.post('gamble/deleteLoserAll')
+			.success(function(data){
+				if(data == 'true'){
+					$scope.gambleLoser = [];
+				}
+			});
+		};
+		$scope.getLoser = function(){
+			$scope.busy = true;
+			$http.post('gamble/getLoser',$.param({'offset':$scope.offset})).success(function(data){
+				if(data.length != 0){
+					$scope.gambleLoser = $scope.gambleLoser.concat(data);
+					$scope.busy = false;
+					$scope.offset += 10;
+				}
+			});
+		};
 		
 		// data init
 		$http.get('gambler/getGamblerList').success(function(data) {
 			$scope.gamblers = data;
 			$scope.loser = data[0];
-		});	
-		
-		$http.get('gamble/getLoser').success(function(data){
-			$scope.gambleLoser = data;
 		});
+		
+		$scope.offset=0;
+		$scope.busy=false;
+		$scope.gambleLoser=[];
 		
 		var now = new Date();
 		

@@ -3,6 +3,13 @@
 	<div class="jumbotron">
 		<h1>GAMBLE</h1>
 		<div ng-show="gamblers.length == 0" class="alert alert-danger" role="alert"><strong>No GAMBLER!!</strong> <a href="#gambler" class="alert-link">let's add gambler</a></div>
+		<p>LOSER CHANCE MULTIPLE
+			<select ng-model="chanceMultipleValue" ng-change="getGambleEntry()">
+				<option value='1'>1</option>
+				<option value='0.5'>1/2</option>
+				<option value='0.33'>1/3</option>
+			</select>
+		</p>
 		<p class="canvas-cantainer">
 			<canvas id="bc" class="subcanvs"></canvas>
 			<canvas id="c" class="subcanvs"></canvas>
@@ -13,7 +20,7 @@
 	</div>
 	
 	<div class="row marketing" >
-		<h2><strong>Gambler List</strong></h2>
+		<h2><strong>Gamblers</strong></h2>
 		<div class="col-xs-6" ng-repeat="gambler in gamblers">
 			<h3><strong>{{gambler.name}}</strong> (<strong>{{gambler.chance}}</strong>%)</h3>
 			<p><input type="checkbox" ng-model="showChecked" id="chk_{{gambler.gamblerId.id}}"> <label for="chk_{{gambler.gamblerId.id}}">내역보기</label></p>
