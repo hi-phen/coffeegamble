@@ -12,9 +12,8 @@
 		<h1 class="text-primary"><strong>Monthly</strong></h1>
 		<div class="col-xs-6" ng-repeat="value in monthly track by $index | orderBy:get($index)">
 		<blockquote>
-			<h2 class="text-info"><strong>{{$index+1 | ordinal}}</strong></h2>
-			<h3 class="text-success">NAME  : <strong>{{gamblerMap[value[0]]}}</strong></h3>
-			<h4 class="text-danger">COUNT : <strong>{{value[1]}}</strong></h4>
+			<h3 class="text-info"><strong>{{$index+1 | ordinal}}</strong></h3>
+				<h4 class="text-success"><strong>{{gamblerMap[value[0]]}} </strong><span class="text-danger">({{value[1]}})</span></h4>
 		</blockquote>
 		</div>
 	</div>
@@ -26,9 +25,8 @@
 			<h2 class="text-muted"><strong>{{$index+1 | ordinal}} WEEK</strong>({{weeklyStr[0]}} ~ {{weeklyStr[1]}})</h2>
 			<div class="col-xs-6" ng-repeat="value in weekly[$index] track by $index">
 				<blockquote>
-				<h2 class="text-info"><strong>{{$index+1 | ordinal}}</strong></h2>
-				<h3 class="text-success">NAME  : <strong>{{gamblerMap[value[0]]}}</strong></h3>
-				<h4 class="text-danger">COUNT : <strong>{{value[1]}}</strong></h4>
+				<h3 class="text-info"><strong>{{$index+1 | ordinal}}</strong></h3>
+				<h4 class="text-success"><strong>{{gamblerMap[value[0]]}} </strong><span class="text-danger">({{value[1]}})</span></h4>
 				</blockquote>
 			</div>
 		</blockquote>
