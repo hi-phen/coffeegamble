@@ -47,7 +47,7 @@ public class GambleController {
 	
 	@RequestMapping("statistics")
 	public String Statistics(){
-		return "Statistics/Statistics";
+		return "statistics/statistics";
 	}
 	
 	@RequestMapping("getGambleEntry")
