@@ -20,13 +20,16 @@
 	</div>
 	
 	<div class="row marketing" >
-		<h2><strong>Gamblers</strong></h2>
-		<div class="col-xs-6" ng-repeat="gambler in gamblers">
-			<h3><strong>{{gambler.name}}</strong> (<strong>{{gambler.chance}}</strong>%)</h3>
-			<p><input type="checkbox" ng-model="showChecked" id="chk_{{gambler.gamblerId.id}}"> <label for="chk_{{gambler.gamblerId.id}}">내역보기</label></p>
-			<p ng-show="showChecked" ng-repeat="msg in gambler.weightLog.slice().reverse() track by $index" ng-class="{'log-blue':msg.indexOf('미당첨')>0,'log-red':msg.indexOf('미당첨')<0}">
-				{{msg}}
-			</p>
-		</div>
+		<h2 class="text-primary"><strong>Gamblers</strong></h2>
+			<div class="col-xs-6" ng-repeat="gambler in gamblers">
+			<blockquote>
+				<h3 class="text-info"><strong>{{gambler.name}}</strong> (<strong>{{gambler.chance}}</strong>%)</h3>
+				<p><input type="checkbox" ng-model="showChecked" id="chk_{{gambler.gamblerId.id}}"> <label for="chk_{{gambler.gamblerId.id}}">내역보기</label></p>
+				<p ng-show="showChecked" ng-repeat="msg in gambler.weightLog.slice().reverse() track by $index" ng-class="{'bg-success':msg.indexOf('미당첨')>0,'bg-danger':msg.indexOf('미당첨')<0}">
+					{{msg}}
+				</p>
+			</blockquote>
+			</div>
+		
 	</div>
 </div>

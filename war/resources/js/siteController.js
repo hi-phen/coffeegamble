@@ -33,9 +33,41 @@
 							,controller:'StaticsController'
 						})
 						.otherwise({redirectTo : '/'});
+				})
+				.filter('ordinal', function() {
+				  var ordinal = function(input) {
+					    // Only process numeric values.
+					    if (isNaN(input) || input === null) return input;
+
+					    var s=["th","st","nd","rd"],
+					    v=input%100;
+					    return input+(s[(v-20)%10]||s[v]||s[0]);
+					  }
+					  return ordinal;
+					})
+				.filter('arrayOrder',function(){
+					return function(input){
+						
+					};
 				});
 	gambleApp.controller('SiteController',function($scope,$route){
 		$scope.$route = $route;
 	});
+	
+//	.filter('reverse', function() {
+//	    return function(input, uppercase) {
+//	      input = input || '';
+//	      var out = "";
+//	      for (var i = 0; i < input.length; i++) {
+//	        out = input.charAt(i) + out;
+//	      }
+//	      // conditional based on optional argument
+//	      if (uppercase) {
+//	        out = out.toUpperCase();
+//	      }
+//	      return out;
+//	    };
+//	  })
+	
     angular.bootstrap(document, ['gambleApp']);
 })();

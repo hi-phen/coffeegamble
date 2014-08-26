@@ -12,14 +12,15 @@
 		</p>
 	</div>
 	<div class="row marketing" infinite-scroll='getLoser()' infinite-scroll-disabled='busy' infinite-scroll-distance='0'>
-		<h2><strong>Games History</strong> <button class="btn btn-md btn-danger" ng-click="deleteLoserAll()" role="button">DELETE ALL</button></h2>
-		<p></p>
+		<h2 class="text-primary"><strong>Games History</strong> <button class="btn btn-md btn-danger" ng-click="deleteLoserAll()" role="button">DELETE ALL</button></h2>
 		<div class="col-xs-6" ng-repeat="loser in gambleLoser track by $index">
-			<p><h3><strong>{{loser.gamblerName}}</strong></h3></p>
-			<p>DATE : {{loser.loseDate | date : 'yyyy-MM-dd HH:mm:ss'}}</p>
-			<p>
-				<a class="btn btn-sm btn-danger" ng-click="deleteLoser(loser,$index)" role="button">DELETE</a>
-			</p>
+			<blockquote>
+				<h3 class="text-info"><strong>{{loser.gamblerName}}</strong></h3>
+				<p class="text-warning">DATE : {{loser.loseDate | date : 'yyyy-MM-dd HH:mm:ss'}}</p>
+				<p>
+					<a class="btn btn-sm btn-danger" ng-click="deleteLoser(loser,$index)" role="button">DELETE</a>
+				</p>
+			</blockquote>
 		</div>
 	</div>
 </div>

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import coffee.gamble.domain.GambleLoser;
 import coffee.gamble.service.GambleService;
 import coffee.gambler.domain.Gambler;
+import coffee.statics.service.StaticsService;
 
 
 @Controller
@@ -27,6 +28,9 @@ public class GambleController {
 
 	@Autowired
 	GambleService gambleService;
+	
+	@Autowired
+	StaticsService staticsService;
 	
 	@Autowired
 	ObjectMapper om;
@@ -81,6 +85,11 @@ public class GambleController {
 	public @ResponseBody String deleteLoserAll() throws JsonGenerationException, JsonMappingException, IOException{
 		gambleService.deleteLoserAll();
 		return om.writeValueAsString(Boolean.TRUE);
+	}
+	
+	@RequestMapping("getStatics")
+	public @ResponseBody String getStatics(@RequestParam int year, @RequestParam int month) throws JsonGenerationException, JsonMappingException, IOException, ParseException{
+		return om.writeValueAsString(staticsService.getStatics(year, month));
 	}
 	
 }

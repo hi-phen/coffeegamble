@@ -1,13 +1,18 @@
 (function(){
 	gambleApp.controller('GambleController',['$scope','$http','drawLottery',function($scope, $http,drawLottery){
 		
+		/**
+		 * 게임 참가자 조회
+		 */
 		$scope.getGambleEntry = function (){
-			console.log($scope.chanceMultipleValue);
 			$http.post('gamble/getGambleEntry',$.param({'chanceMultipleValue':$scope.chanceMultipleValue})).success(function(data) {
 				$scope.gamblers = data;
 			});	
 		};
 		
+		/**
+		 * 게임 실행
+		 */
 		$scope.gamble = function(){
 			if($scope.gamblers.length > 0){
 				$http.post('gamble/getGambleResult',$.param({'chanceMultipleValue':$scope.chanceMultipleValue}))
@@ -18,11 +23,15 @@
 			}
 		};
 		
+		//data init
 		$scope.chanceMultipleValue = 1;
 		$scope.getGambleEntry($scope.chanceMultipleValue);
 		
 	}]);
 	
+	/**
+	 * 당첨자를 화면에 그림
+	 */
 	gambleApp.service('drawLottery',[function(name){
 		return function(name){
 			var canvas = $("#c");
@@ -102,6 +111,6 @@
 	//		canvas[0].addEventListener("mouseleave", function (e) {
 	//			onDrag = false;
 	//	    },false);
-		}
+		};
 	}]);
 })();

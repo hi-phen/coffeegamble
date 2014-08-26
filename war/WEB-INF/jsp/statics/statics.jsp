@@ -1,24 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <div>
 	<div class="jumbotron">
-<!-- 		<h1>LOSER</h1> -->
-<!-- 		<p> -->
-<!-- 			<select id="gamblerinput" ng-model="loser" class="btn-group" ng-options="gambler.name for gambler in gamblers" data-toggle="popover" data-placement="bottom" data-content="Gambler is not valid"> -->
-<!-- 			</select> -->
-<!-- 			<input id="dateinput" class="btn-group" ng-model="date" placeholder="yyyy-MM-dd" data-toggle="popover" data-placement="bottom" data-content="Date format is not valid"> -->
-<!-- 		</p> -->
-<!-- 		<p> -->
-<!-- 			<button class="btn btn-lg btn-success" ng-click="addLoser()" role="button" >ADD</button> -->
-<!-- 		</p> -->
+		<h1>STATICS</h1>
+		<p>
+			<select ng-change="getStatics()" ng-model="year" class="btn-group" ng-options="o for o in yearOption"></select>
+			<select ng-change="getStatics()" ng-model="month" class="btn-group" ng-options="o for o in monthOption"></select>
+			
+		</p>
 	</div>
 	<div class="row marketing" >
-<!-- 		<h2><strong>Games History List</strong></h2> -->
-<!-- 		<div class="col-xs-6" ng-repeat="loser in gambleLoser"> -->
-<!-- 			<p><h3><strong>{{loser.gamblerName}}</strong></h3></p> -->
-<!-- 			<p>DATE : {{loser.loseDate | date : 'yyyy-MM-dd hh:mm:ss'}}</p> -->
-<!-- 			<p> -->
-<!-- 				<a class="btn btn-sm btn-danger" ng-click="deleteLoser(loser.loserId.id)" role="button">DELETE</a> -->
-<!-- 			</p> -->
-<!-- 		</div> -->
+		<h1 class="text-primary"><strong>Monthly</strong></h1>
+		<div class="col-xs-6" ng-repeat="value in monthly track by $index | orderBy:get($index)">
+		<blockquote>
+			<h2 class="text-info"><strong>{{$index+1 | ordinal}}</strong></h2>
+			<h3 class="text-success">NAME  : <strong>{{gamblerMap[value[0]]}}</strong></h3>
+			<h4 class="text-danger">COUNT : <strong>{{value[1]}}</strong></h4>
+		</blockquote>
+		</div>
+	</div>
+	
+	<div class="row marketing" >
+		<h1 class="text-primary"><strong>Weekly</strong></h1>
+		<div class="row marketing" ng-repeat="weeklyStr in weeklyText track by $index">
+		<blockquote>
+			<h2 class="text-muted"><strong>{{$index+1 | ordinal}} WEEK</strong>({{weeklyStr[0]}} ~ {{weeklyStr[1]}})</h2>
+			<div class="col-xs-6" ng-repeat="value in weekly[$index] track by $index">
+				<blockquote>
+				<h2 class="text-info"><strong>{{$index+1 | ordinal}}</strong></h2>
+				<h3 class="text-success">NAME  : <strong>{{gamblerMap[value[0]]}}</strong></h3>
+				<h4 class="text-danger">COUNT : <strong>{{value[1]}}</strong></h4>
+				</blockquote>
+			</div>
+		</blockquote>
+		</div>
 	</div>
 </div>
