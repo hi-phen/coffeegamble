@@ -27,10 +27,10 @@
 							templateUrl : '/gamble/loser'
 							,controller:'LoserController'
 						})
-						.when('/statics',
+						.when('/statistics',
 						{
-							templateUrl : '/gamble/statics'
-							,controller:'StaticsController'
+							templateUrl : '/gamble/statistics'
+							,controller:'StatisticsController'
 						})
 						.otherwise({redirectTo : '/'});
 				})

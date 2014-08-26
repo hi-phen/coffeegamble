@@ -28,7 +28,7 @@
 				<li ng-class="{active:$route.current.templateUrl=='/gamble'}"><a href="#">Home</a></li>
 				<li ng-class="{active:$route.current.templateUrl=='/gambler'}"><a href="#gambler">Gambler</a></li>
 				<li ng-class="{active:$route.current.templateUrl=='/gamble/loser'}"><a href="#history">History</a></li>
-				<li ng-class="{active:$route.current.templateUrl=='/gamble/statics'}"><a href="#statics">Statics</a></li>
+				<li ng-class="{active:$route.current.templateUrl=='/gamble/statistics'}"><a href="#statistics">Statistics</a></li>
 			</ul>
 			<h3 class="text-muted">Coffee Gamble</h3>
 		</div>
@@ -43,6 +43,6 @@
 	<script src="/resources/js/gambleController.js"></script>
 	<script src="/resources/js/gamblerController.js"></script>
 	<script src="/resources/js/loserController.js"></script>
-	<script src="/resources/js/staticsController.js"></script>
+	<script src="/resources/js/statisticsController.js"></script>
 </body>
 </html>

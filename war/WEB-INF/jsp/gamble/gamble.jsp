@@ -24,7 +24,7 @@
 			<div class="col-xs-6" ng-repeat="gambler in gamblers">
 			<blockquote>
 				<h3 class="text-info"><strong>{{gambler.name}}</strong> (<strong>{{gambler.chance}}</strong>%)</h3>
-				<p><input type="checkbox" ng-model="showChecked" id="chk_{{gambler.gamblerId.id}}"> <label for="chk_{{gambler.gamblerId.id}}">내역보기</label></p>
+				<p><input type="checkbox" ng-model="showChecked" id="chk_{{gambler.gamblerId.id}}"> <label for="chk_{{gambler.gamblerId.id}}">History</label></p>
 				<p ng-show="showChecked" ng-repeat="msg in gambler.weightLog.slice().reverse() track by $index" ng-class="{'bg-success':msg.indexOf('미당첨')>0,'bg-danger':msg.indexOf('미당첨')<0}">
 					{{msg}}
 				</p>

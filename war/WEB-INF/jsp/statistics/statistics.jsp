@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <div>
 	<div class="jumbotron">
-		<h1>STATICS</h1>
+		<h1>STATISTICS</h1>
 		<p>
 			<select ng-change="getStatics()" ng-model="year" class="btn-group" ng-options="o for o in yearOption"></select>
 			<select ng-change="getStatics()" ng-model="month" class="btn-group" ng-options="o for o in monthOption"></select>

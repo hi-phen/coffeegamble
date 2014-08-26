@@ -1,13 +1,10 @@
-package coffee.statics.service;
+package coffee.statistics.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,19 +16,19 @@ import coffee.gamble.domain.GambleLoser;
 import coffee.gamble.service.GambleService;
 
 @Service
-public class StaticsService {
+public class StatisticsService {
 
 	@Autowired
 	GambleService gambleService;
 	/**
 	 * Desc : 해당 월과 주차별 당첨 통계 제공
-	 * @Method Name : getStatics
+	 * @Method Name : getStatistics
 	 * @param year
 	 * @param month
 	 * @return
 	 * @throws ParseException 
 	 */
-	public Map<String,Object> getStatics(int year, int month) throws ParseException {
+	public Map<String,Object> getStatistics(int year, int month) throws ParseException {
 		Map<Long,Integer> monthly = new HashMap<Long,Integer>();
 		List<Map<Long,Integer>> weekly = new ArrayList<Map<Long,Integer>>();
 		List<String[]> weeklyText = new ArrayList<String[]>();

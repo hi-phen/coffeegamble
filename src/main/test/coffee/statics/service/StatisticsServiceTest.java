@@ -1,10 +1,8 @@
 package coffee.statics.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 
 import org.junit.After;
@@ -20,7 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import coffee.gamble.service.GambleService;
 import coffee.gambler.domain.Gambler;
 import coffee.gambler.service.GamblerService;
-import coffee.statics.service.StaticsService;
+import coffee.statistics.service.StatisticsService;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
@@ -32,11 +30,11 @@ import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 		,"file:war/WEB-INF/classes/config/spring/applicationContext.xml"
 		,"file:war/WEB-INF/classes/config/spring/appServlet/servlet-context.xml"
 })
-public class StaticsServiceTest {
+public class StatisticsServiceTest {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	StaticsService staticsService;
+	StatisticsService StatisticsService;
 	
 	@Autowired
 	GambleService gambleService;
@@ -83,11 +81,11 @@ public class StaticsServiceTest {
 	}
 	
 	@Test
-	public void getStatics() throws ParseException{
-		Map statics = staticsService.getStatics(2014,8);
-		assertNotNull(statics.get("monthly"));
-		assertNotNull(statics.get("weekly"));
-		assertNotNull(statics.get("weeklyText"));
-		assertNotNull(statics.get("gamblerMap"));
+	public void getStatistics() throws ParseException{
+		Map Statistics = StatisticsService.getStatistics(2014,8);
+		assertNotNull(Statistics.get("monthly"));
+		assertNotNull(Statistics.get("weekly"));
+		assertNotNull(Statistics.get("weeklyText"));
+		assertNotNull(Statistics.get("gamblerMap"));
 	}
 }

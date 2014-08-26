@@ -1,6 +1,6 @@
 (function(){
 	
-	gambleApp.controller('StaticsController',function($scope, $http, $filter,drawLottery){
+	gambleApp.controller('StatisticsController',function($scope, $http, $filter,drawLottery){
 		var now = new Date();
 		$scope.year = now.getFullYear();
 		$scope.month = now.getMonth()+1;
@@ -16,8 +16,8 @@
 			$scope.monthOption.push(i);	
 		}
 
-		$scope.getStatics = function(){
-			$http.post("gamble/getStatics",$.param({"year":$scope.year,"month":$scope.month}))
+		$scope.getStatistics = function(){
+			$http.post("gamble/getStatistics",$.param({"year":$scope.year,"month":$scope.month}))
 			.success(function(data){
 				//정렬이 가능한 형태로 변형 및 정렬
 				var sortable = [];
@@ -44,7 +44,7 @@
 		};
 		
 		
-		$scope.getStatics();
+		$scope.getStatistics();
 	});
 	
 	
