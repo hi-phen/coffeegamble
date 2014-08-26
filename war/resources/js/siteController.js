@@ -3,7 +3,7 @@
 	//규모가 커지면 require.js,ocLazyLoad.js 로 교체하는게 좋을듯..
 	gambleApp = angular.module('gambleApp',['ngRoute','infinite-scroll'])
 				.config(function($controllerProvider,$compileProvider, $filterProvider, $provide,$routeProvider,$httpProvider){
-				  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+				    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
 					gambleApp.controller = $controllerProvider.register;
 					gambleApp.service = $provide.service;
@@ -33,6 +33,7 @@
 							,controller:'StatisticsController'
 						})
 						.otherwise({redirectTo : '/'});
+					
 				})
 				.filter('ordinal', function() {
 				  var ordinal = function(input) {
@@ -45,29 +46,23 @@
 					  }
 					  return ordinal;
 					})
-				.filter('arrayOrder',function(){
-					return function(input){
-						
-					};
-				});
+				.config(['$httpProvider', function($httpProvider) {
+					    $httpProvider.interceptors.push(function(){
+					    	return {
+					    		request : function(request){
+					    			$('.container').waiting({fixed:true});
+					    			return request;
+					    		}
+					    		,response : function(response){
+					    			$('.container').waiting('done');
+					    			return response;
+					    		}
+					    	};
+					    });
+					}]);
 	gambleApp.controller('SiteController',function($scope,$route){
 		$scope.$route = $route;
 	});
-	
-//	.filter('reverse', function() {
-//	    return function(input, uppercase) {
-//	      input = input || '';
-//	      var out = "";
-//	      for (var i = 0; i < input.length; i++) {
-//	        out = input.charAt(i) + out;
-//	      }
-//	      // conditional based on optional argument
-//	      if (uppercase) {
-//	        out = out.toUpperCase();
-//	      }
-//	      return out;
-//	    };
-//	  })
 	
     angular.bootstrap(document, ['gambleApp']);
 })();

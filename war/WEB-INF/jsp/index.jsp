@@ -13,11 +13,13 @@
 <script	src="/resources/js/common/angular.min.js"></script>
 <script	src="/resources/js/common/angular-route.min.js"></script>
 <script	src="/resources/js/common/ng-infinite-scroll.min.js"></script>
+<script	src="/resources/js/common/jquery.waiting.min.js"></script>
 
 <link rel="stylesheet"	href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet"	href="/resources/css/bootstrap-theme.min.css">
 <link rel="stylesheet"  href="/resources/css/jumbotron-narrow.css">
 <link rel="stylesheet"  href="/resources/css/common.css">
+<link rel="stylesheet"  href="/resources/css/waiting.css">
 
 <title>COFFEE GAMBLE</title>
 </head>

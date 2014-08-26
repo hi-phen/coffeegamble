@@ -3,8 +3,8 @@
 	<div class="jumbotron">
 		<h1>STATISTICS</h1>
 		<p>
-			<select ng-change="getStatics()" ng-model="year" class="btn-group" ng-options="o for o in yearOption"></select>
-			<select ng-change="getStatics()" ng-model="month" class="btn-group" ng-options="o for o in monthOption"></select>
+			<select ng-change="getStatistics()" ng-model="year" class="btn-group" ng-options="o for o in yearOption"></select>
+			<select ng-change="getStatistics()" ng-model="month" class="btn-group" ng-options="o for o in monthOption"></select>
 			
 		</p>
 	</div>
