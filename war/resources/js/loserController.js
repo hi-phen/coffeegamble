@@ -15,7 +15,7 @@
 					date += " "+(now.getHours()<10?"0"+now.getHours():now.getHours())+":"
 							+(now.getMinutes()<10?"0"+now.getMinutes():now.getMinutes())+":"
 							+(now.getSeconds()<10?"0"+now.getSeconds():now.getSeconds());
-					$http.post('gamble/addLoser',$.param({'gamblerKey':$scope.loser.gamblerId.id,'gamblerName':$scope.loser.name,'dateStr':date}))
+					$http.post('gamble/addLoser',$.param({'gamblerKey':$scope.loser.gamblerId.id,'gamblerName':$scope.loser.name,'dateStr':$scope.date}))
 					.success(function(data){
 						if(data > 0){
 							$scope.gambleLoser.unshift({

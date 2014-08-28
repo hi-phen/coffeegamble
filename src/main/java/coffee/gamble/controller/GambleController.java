@@ -3,6 +3,8 @@ package coffee.gamble.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -63,10 +65,11 @@ public class GambleController {
 	
 	@RequestMapping("addLoser")
 	public @ResponseBody String addLoser(long gamblerKey,String gamblerName,String dateStr) throws ParseException, JsonGenerationException, JsonMappingException, IOException{
+		String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Gambler gambler = new Gambler(gamblerKey);
 		gambler.setName(gamblerName);
-		return om.writeValueAsString(gambleService.addLoser(gambler,sdf.parse(dateStr)).getId());
+		return om.writeValueAsString(gambleService.addLoser(gambler,sdf.parse(dateStr+" "+time)).getId());
 	}
 	
 	@RequestMapping("getLoser")
